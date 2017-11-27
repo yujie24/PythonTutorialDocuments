@@ -57,5 +57,23 @@ text = "# This is not a comment because it's inside quotes."
 128
 ```
 
+等号“=”表示赋值给一个变量。在赋值之后不会有结果显示出来
+
+```python
+>>> width = 20
+>>> height = 5 * 9
+>>> width * height
+900
+```
+
+如果变量没有被“定义”（在python中就是被赋值），会提示错误：
+
+```python
+>>> n  # try to access an undefined variable
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'n' is not defined
+```
+
 
 
