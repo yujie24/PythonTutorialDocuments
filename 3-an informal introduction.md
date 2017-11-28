@@ -13,11 +13,11 @@ spam = 1  # and this is the second comment
 text = "# This is not a comment because it's inside quotes."
 ```
 
-## 3.1 将Python用作计算器
+## 3.1 将Python用作计算器（use Python as a calculator）
 
 打开解释器，在提示符之后开始键入。
 
-### 3.1.1 数字
+### 3.1.1 数字（numbers）
 
 ```python
 >>> 2 + 2
@@ -73,6 +73,149 @@ text = "# This is not a comment because it's inside quotes."
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 NameError: name 'n' is not defined
+```
+
+如果有多种操作对象（operands），会统一将整型转换成浮点型：
+
+```python
+>>> 4 * 3.75 - 1
+14.0
+```
+
+交互模式中，上一次打印出来的值会被赋给下划线“_”。也就意味着可以进行连续的计算：
+
+```python
+>>> tax = 12.5 / 100
+>>> price = 100.50
+>>> price * tax
+12.5625
+>>> price + _
+113.0625
+>>> round(_, 2)     # round（a，b）是给值a设置一个有效位数b？
+113.06
+```
+
+除了int（整型）和float（浮点型），Python还支持decimal（小数型，十进制）和fraction（分数）。
+
+同时内置了对复数（complex numbers）的支持，用j或J来表示虚部（如：3+5j）
+
+### 3.1.2 字符串（strings）
+
+用单引号single quotes（'...'）或双引号double quotes（"..."）来表示。反斜线backslashes（\）可以转义引号。
+
+```python
+>>> 'spam eggs'  # single quotes
+'spam eggs'
+>>> 'doesn\'t'  # use \' to escape the single quote...
+"doesn't"
+>>> "doesn't"  # ...or use double quotes instead
+"doesn't"
+>>> '"Yes," he said.'
+'"Yes," he said.'
+>>> "\"Yes,\" he said."
+'"Yes," he said.'
+>>> '"Isn\'t," she said.'
+'"Isn\'t," she said.'
+```
+
+如果字符串内有单引号'，则用双引号"括起来。一般来说，单引和双引是一样的。
+
+print()函数提供了更可读的输出，会将外面的引号（enclosing quotes不知道怎么翻译）忽略，打印转移之后的字符和特殊字符：
+
+```python
+>>> '"Isn\'t," she said.'
+'"Isn\'t," she said.'
+>>> print('"Isn\'t," she said.')
+"Isn't," she said.
+>>> s = 'First line.\nSecond line.'  # \n means newline
+>>> s  # without print(), \n is included in the output
+'First line.\nSecond line.'
+>>> print(s)  # with print(), \n produces a new line
+First line.
+Second line.
+```
+
+如果不希望反斜线\转义，可以用raw string，在第一个引号前加上一个字母r:
+
+```python
+>>> print('C:\some\name')  # here \n means newline!
+C:\some
+ame
+>>> print(r'C:\some\name')  # note the r before the quote
+C:\some\name
+```
+
+多行字符串用三个引号表示：'''...'''或者"""..."""
+
+不过这会自动将第一行包括进去，在第一行末尾加一个反斜线来避免：
+
+```python
+print("""\
+Usage: thingy [OPTIONS]
+     -h                        Display this usage message
+     -H hostname               Hostname to connect to
+""")
+```
+
+最终输出结果是：
+
+```
+Usage: thingy [OPTIONS]
+     -h                        Display this usage message
+     -H hostname               Hostname to connect to
+```
+
+加号+表示连接字符串，星号*表示重复字符串。
+
+```python
+>>> # 3 times 'un', followed by 'ium'
+>>> 3 * 'un' + 'ium'
+'unununium'
+```
+
+两个以上紧挨着的字符串会自动串级（concatenate）：
+
+```python
+>>> 'Py' 'thon'
+'Python'
+```
+
+上面这个特性在你希望将长字符串分开的时候特别有用：
+
+```python
+>>> text = ('Put several strings within parentheses '
+...         'to have them joined together.')
+>>> text
+'Put several strings within parentheses to have them joined together.'
+```
+
+这只在文字（literals）之间可以实现，在变量（variables）和表述（expressions）不行：
+
+```python
+>>> prefix = 'Py'
+>>> prefix 'thon'  # can't concatenate a variable and a string literal
+  ...
+SyntaxError: invalid syntax
+>>> ('un' * 3) 'ium'
+  ...
+SyntaxError: invalid syntax
+```
+
+如果想连接变量和文字，用加号+
+
+```python
+>>> prefix + 'thon'
+'Python'
+```
+
+字符可以被索引，第一个字符的索引是0。没有不同的字符类型，一个字符就是大小为1的字符串：
+
+```python
+>>> word = 'Python'
+>>> word[0]  # character in position 0
+'P'
+>>> word[5]  # character in position 5
+'n'
 ```
 
 
