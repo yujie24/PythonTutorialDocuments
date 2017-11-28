@@ -218,5 +218,93 @@ SyntaxError: invalid syntax
 'n'
 ```
 
+索引（indices）也可为负数，从右侧开始数。（由于-0与0一样，所以负数索引从-1开始）
+
+```python
+>>> word[-1]  # last character
+'n'
+>>> word[-2]  # second-last character
+'o'
+>>> word[-6]
+'P'
+```
+
+也可以用切片（slicing）截取一个子串（substring）。
+
+用[a:b]来表示，a是开头，b是结尾，包括开头，但不包括结尾。所以s[:i]+s[i:]总是等于s：
+
+```python
+>>> word[0:2]  # characters from position 0 (included) to 2 (excluded)
+'Py'
+>>> word[2:5]  # characters from position 2 (included) to 5 (excluded)
+'tho'
+>>> word[:2] + word[2:]
+'Python'
+>>> word[:4] + word[4:]
+'Python'
+```
+
+省略的第一个索引默认为0，省略的第二个索引默认为切割的字符串大小。
+
+为方便记住切割的工作原理，将索引视为字符之间的索引。第一个字符左边缘编号为0，最后一个字符右边缘是n
+
+```
+ +---+---+---+---+---+---+
+ | P | y | t | h | o | n |
+ +---+---+---+---+---+---+
+ 0   1   2   3   4   5   6
+-6  -5  -4  -3  -2  -1
+```
+
+索引为非负数时，切片的长度和索引是不一样的。例如，word[1:3]的长度是2。
+
+太大的索引会报错，但是超出范围的切片索引会被自动处理：
+
+```python
+>>> word[42]  # the word only has 6 characters
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+IndexError: string index out of range
+>>> word[4:42]
+'on'
+>>> word[42:]
+''
+```
+
+字符串是不能够被改变的（immutable）。分配给字符串中的索引位置会导致错误（Therefore, assigning to an indexed position in the string results in an error. 这句话不知道怎么翻译）。
+
+```python
+>>> word[0] = 'J'
+  ...
+TypeError: 'str' object does not support item assignment
+>>> word[2:] = 'py'
+  ...
+TypeError: 'str' object does not support item assignment
+
+如果想要一个不同的字符串，那就用加号+创造一个新的。
+
+```python
+>>> 'J' + word[1:]
+'Jython'
+>>> word[:2] + 'py'
+'Pypy'
+```
+
+内建函数len()可以返回字符串的长度：
+
+```python
+>>> s = 'supercalifragilisticexpialidocious'
+>>> len(s)
+34
+```
+
+### 3.1.3 元组（lists）
+
+
+
+
+
+
+
 
 
