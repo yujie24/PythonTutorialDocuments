@@ -280,6 +280,7 @@ TypeError: 'str' object does not support item assignment
 >>> word[2:] = 'py'
   ...
 TypeError: 'str' object does not support item assignment
+```
 
 如果想要一个不同的字符串，那就用加号+创造一个新的。
 
