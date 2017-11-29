@@ -1,4 +1,4 @@
-# 更多的控制流程工具（control flow tools）
+# 4 更多的控制流程工具（control flow tools）
 
 除了while声明意外，还有很多常见的控制流声明
 
@@ -63,6 +63,68 @@ defenestrate 12
 这个例子中会试图创造一个无限的列表，不停地插入“defenestrate”
 
 ## 4.3 range()函数
+
+要迭代数列，range()会很方便，它生成（generate）算数级数（arithmetic progression）：
+
+```python
+>>> for i in range(5):
+...     print(i)
+...
+0
+1
+2
+3
+4
+```
+
+需要注意的是，给定的终点不是生成的序列的一部分：range(10)生成10个值，长度为10的序列的序列的项目的合法声明（the legal indices for items of a seaquence of length 10）。
+
+可让其从另一个数字开始，或者指定不同的增量（可为负数，称之为步长（step））：
+
+```python
+range(5, 10)
+   5 through 9
+
+range(0, 10, 3)
+   0, 3, 6, 9
+
+range(-10, -100, -30)
+  -10, -40, -70
+```
+
+要通过索引来迭代序列的话，可以将range()和len()结合在一起：
+
+```python
+>>> a = ['Mary', 'had', 'a', 'little', 'lamb']
+>>> for i in range(len(a)):
+...     print(i, a[i])
+...
+0 Mary
+1 had
+2 a
+3 little
+4 lamb
+```
+
+在上述的例子中，用enumerate()函数更方便。（在Looping Techniques中有介绍）
+
+如果直接打印range()的话，会很奇怪：
+
+```python
+>>> print(range(10))
+range(0, 10)
+```
+
+在许多方面，由range()返回的对象表现得像是一个列表，但实际上并非如此。 它是一个对象，当你迭代它时，它会返回所需序列的连续项目，但它并不真正生成列表，从而节省空间。
+
+我们说这样的对象是可迭代的，也就是说，适合作为函数和构造的目标，期望从中可以获得连续的东西，直到耗尽为止。 我们已经看到for语句就是这样一个迭代器。 函数list()是另一个; 它从迭代中创建列表：
+
+```python
+>>> list(range(5))
+[0, 1, 2, 3, 4]
+```
+
+之后会看到更多返回迭代器（iterable）的函数，并将这些迭代器当做变量或者变量？（argument）
 
 ## 4.4 break和continue声明，循环中的else子句（clause）
 
