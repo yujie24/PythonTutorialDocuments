@@ -396,9 +396,74 @@ TypeError: 'str' object does not support item assignment
 'b'
 ```
 
+## 3.2 向编程踏出第一步
 
+例：完成复杂的任务，编写菲波那切数列的初始子序列：
 
+```python
+>>> # Fibonacci series:
+... # the sum of two elements defines the next
+... a, b = 0, 1
+>>> while b < 10:
+...     print(b)
+...     a, b = b, a+b
+...
+1
+1
+2
+3
+5
+8
+```
 
+这个例子介绍了几个新功能：
 
+- 多重赋值（multiple assignment）：
 
+第一行中，a和b被分别赋值为0和1。最后一行也用到了。在赋值之前，右侧的表达式最先被评估，右侧的表示从左到右进行评估。
 
+- while循环（loop）：
+
+当条件为真时，循环一直继续。Python和C一样，非零整数为真（true），零为假（false）。
+
+比较操作符，与C语言一样：
+
+|小于|less than|<|
+|大于|greater than|>|
+|等于|equal to|=|
+|小于等于|less than or equal to|<=|
+|大于等于|greater than or equal to|>=|
+|不等于|not equal to|!=|
+
+- 循环的主体全部缩进（indented）:
+
+缩进是Python的一种群组声明的方式（Indentation is Python’s way of grouping statements.）
+
+用tab或者space键来设定缩进。补充：一般python的缩进规定是4个字符。
+
+当输入复合声明的时候，最后一行用空白行来表示完成（indicate completion）因为解析器（parser）猜不出你什么时候输入最后一行。
+
+注意：每一基本块（basic block）需要相同的缩进单位。
+
+- print()函数：
+
+打印出给出的参数的值。其处理多个参数、浮点数和字符串的方式不同。
+
+字符串打印的时候没有引号，元素之间会插入（inserted）空格，所以可以很好地格式化：
+
+```python
+>>> i = 256*256
+>>> print('The value of i is', i)
+The value of i is 65536
+```
+
+关键字参数（keyword argument）end用来避免输出后的换行符（avoid the newline），或者用不同的字符串结束输出：
+
+```python
+>>> a, b = 0, 1
+>>> while b < 1000:
+...     print(b, end=',')
+...     a, b = b, a+b
+...
+1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,
+```
