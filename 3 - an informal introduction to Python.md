@@ -428,6 +428,8 @@ TypeError: 'str' object does not support item assignment
 
 比较操作符，与C语言一样：
 
+|比较操作符|英文解释|符号|
+|------|------|------|
 |小于|less than|<|
 |大于|greater than|>|
 |等于|equal to|=|
