@@ -30,6 +30,8 @@ if...elif...elif...序列（sequence）在其他语言中用switch或case声明�
 
 Python中的for声明与Pascal和C语言中不太一样。
 
+|语言|用法|
+|------|-------|
 |Pascal|迭代算数数列（arithmetic progression of numbers）|
 |C|用户可以自定义迭代步骤（iteration step）和停止条件（halting condition）|
 |Python|可以迭代任何项目（item）的任何序列（sequence）|
@@ -128,7 +130,83 @@ range(0, 10)
 
 ## 4.4 break和continue声明，循环中的else子句（clause）
 
+break语句，和C语言中一样，打破了最内层（innermost）的for或while循环。
+
+循环语句可能会有一个else语句；当循环用尽列表（用for语句）或者条件变为false时执行，而不是在循环由break语句终止时执行。
+
+以下面为例，搜索素数（prime numbers）： 
+
+```python
+>>> for n in range(2, 10):
+...     for x in range(2, n):
+...         if n % x == 0:
+...             print(n, 'equals', x, '*', n//x)
+...             break
+...     else:
+...         # loop fell through without finding a factor
+...         print(n, 'is a prime number')
+...
+2 is a prime number
+3 is a prime number
+4 equals 2 * 2
+5 is a prime number
+6 equals 2 * 3
+7 is a prime number
+8 equals 2 * 4
+9 equals 3 * 3
+```
+
+（注意：上述代码是正确的。else语句属于第二个for循环，而不是if声明）
+
+当与循环一起使用，相比于if中的else语句，else子句与try语句中的else子句更相似一些：
+
+try语句中的else子句在没有异常发生（no exception occurs）时执行；循环中的else子句在没有break发生的情况下执行。更多有关try语句和异常，参阅Handling Exceptions。
+
+从C语言中借用一个continue语句，继续下一个迭代循环：
+
+```python
+>>> for num in range(2, 10):
+...     if num % 2 == 0:
+...         print("Found an even number", num)
+...         continue
+...     print("Found a number", num)
+Found an even number 2
+Found a number 3
+Found an even number 4
+Found a number 5
+Found an even number 6
+Found a number 7
+Found an even number 8
+Found a number 9
+```
+
 ## 4.5 pass声明
+
+pass语句什么都不执行（The pass statement does nothing）。
+
+语句需要语法时使用它，但程序不需要任何操作。例如：
+
+```python
+>>> while True:
+...     pass  # Busy-wait for keyboard interrupt (Ctrl+C)
+...
+```
+
+这个通常用来创建最小类（minimal classes）：
+
+```python
+>>> class MyEmptyClass:
+...     pass
+...
+```
+
+当写一段新的代码时，pass语句也可以用作占位符（place-holder），在函数（function）或者条件体（conditional body）中。使你可以继续思考一个更抽象的层次（at a more abstract level）。pass语句被无声地忽略了：
+
+```python
+>>> def initlog(*args):
+...     pass   # Remember to implement this!
+...
+```
 
 ## 4.6 定义函数（defining functions）
 
