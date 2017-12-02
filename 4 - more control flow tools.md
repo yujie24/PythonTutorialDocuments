@@ -210,6 +210,73 @@ pass语句什么都不执行（The pass statement does nothing）。
 
 ## 4.6 定义函数（defining functions）
 
+我们可以穿件一个用来生成指定边界的斐波那契数列的函数：
+
+```python
+>>> def fib(n):    # write Fibonacci series up to n
+...     """Print a Fibonacci series up to n."""
+...     a, b = 0, 1
+...     while a < n:
+...         print(a, end=' ')
+...         a, b = b, a+b
+...     print()
+...
+>>> # Now call the function we just defined:
+... fib(2000)
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597
+```
+
+关键字 def 引入了一个函数 定义。在其后必须跟有函数名和包括形式参数的圆括号。函数体语句从下一行开始，必须是缩进的。
+
+函数体的第一行语句可以是可选的字符串文本，这个字符串是函数的文档字符串，或者称为 docstring。（更多关于 docstrings 的信息请参考 文档字符串） 有些工具通过 docstrings 自动生成在线的或可打印的文档，或者让用户通过代码交互浏览；在你的代码中包含 docstrings 是一个好的实践，让它成为习惯吧。
+
+函数 调用 会为函数局部变量生成一个新的符号表。确切的说，所有函数中的变量赋值都是将值存储在局部符号表。变量引用首先在局部符号表中查找，然后是包含函数的局部符号表，然后是全局符号表，最后是内置名字表。因此，全局变量不能在函数中直接赋值（除非用 global 语句命名），尽管他们可以被引用。
+
+函数引用的实际参数在函数调用时引入局部符号表，因此，实参总是 传值调用 （这里的 值 总是一个对象 引用 ，而不是该对象的值）。一个函数被另一个函数调用时，一个新的局部符号表在调用过程中被创建。
+
+一个函数定义会在当前符号表内引入函数名。函数名指代的值（即函数体）有一个被 Python 解释器认定为 用户自定义函数 的类型。 这个值可以赋予其他的名字（即变量名），然后它也可以被当做函数使用。这可以作为通用的重命名机制:
+
+```python
+>>> fib
+<function fib at 10042ed0>
+>>> f = fib
+>>> f(100)
+0 1 1 2 3 5 8 13 21 34 55 89
+```
+
+如果你使用过其他语言，你可能会反对说：fib 不是一个函数，而是一个方法，因为它并不返回任何值。事实上，没有 return 语句的函数确实会返回一个值，虽然是一个相当令人厌烦的值（指 None ）。这个值被称为 None （这是一个内建名称）。如果 None 值是唯一被书写的值，那么在写的时候通常会被解释器忽略（即不输出任何内容）。如果你确实想看到这个值的输出内容，请使用 print() 函数:
+
+```python
+>>> fib(0)
+>>> print(fib(0))
+None
+```
+
+定义一个返回斐波那契数列数字列表的函数，而不是打印它，是很简单的：
+
+```python
+>>> def fib2(n): # return Fibonacci series up to n
+...     """Return a list containing the Fibonacci series up to n."""
+...     result = []
+...     a, b = 0, 1
+...     while a < n:
+...         result.append(a)    # see below
+...         a, b = b, a+b
+...     return result
+...
+>>> f100 = fib2(100)    # call it
+>>> f100                # write the result
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+```
+
+和以前一样，这个例子演示了一些新的Python的功能：
+
+- return语句从函数中返回一个值，不带表达式的return返回None。过程结束后也会返回None。
+
+- 语句 return.append(b)称为链表对象result的一个方法。方法是一“属于”个某个对象的函数，它被命名为obj.methodename，这里的obj是某个对象（可能是一个表达式），methodename是某个在该对象类型定义中的方法的命名。
+
+不同的类型定义不同的方法。不同类型可能有同样名字的方法，但不会混淆。（当你定义自己的对象类型和方法时，可能会出现这种情况，class的定义方法详见“类”）。示例中演示的append()方法由链表对象定义，它向链表中加入一个新元素。在示例中
+
 ## 4.7 更多关于定义函数
 
 ### 4.7.1 默认参数值（Default Argument Values）
@@ -218,7 +285,7 @@ pass语句什么都不执行（The pass statement does nothing）。
 
 ### 4.7.3 任意参数列表（Arbitrary Argument Lists）
 
-### 4.7.4 解压参数列表（Unpacking Argument Lists）
+### 4.7.4 分拆参数列表（Unpacking Argument Lists）
 
 ### 4.7.5 Lambda表达式（Lambda Expressions）
 
@@ -226,4 +293,4 @@ pass语句什么都不执行（The pass statement does nothing）。
 
 ### 4.7.7 函数注释（Annotations）
 
-## 4.8 Intermezzo: Coding Style
+## 4.8 Intermezzo: 编码风格（Coding Style）
