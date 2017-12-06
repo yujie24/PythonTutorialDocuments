@@ -279,7 +279,61 @@ None
 
 ## 4.7 更多关于定义函数
 
+在Python中，你也可以定义包含若干参数的函数。这里有三种可用的形式，也可以混合使用。
+
 ### 4.7.1 默认参数值（Default Argument Values）
+
+最常用的一种形式是为一个或多个参数指定默认值。这会创建一个可以使用比定义时允许的参数更少的参数调用的函数。
+
+```python
+def ask_ok(prompt, retries=4, complaint='Yes or no, please!'):
+    while True:
+        ok = input(prompt)
+        if ok in ('y', 'ye', 'yes'):
+            return True
+        if ok in ('n', 'no', 'nop', 'nope'):
+            return False
+        retries = retries - 1
+        if retries < 0:
+            raise OSError('uncooperative user')
+        print(complaint)
+```
+
+这个函数可以通过集中不同的方式调用：
+
+- 只给出必要的参数：
+
+   ```python
+   ask_ok('Do you really want to quit?')
+   ```
+
+- 给出一个可选的参数：
+
+   ```python
+   ask_ok('OK to overwrite the file?', 2)
+   ```
+
+- 或者给出所有的参数：
+
+   ```python
+   ask_ok('OK to overwrite the file?', 2, 'Come on, only yes or no!')
+   ```
+
+这个例子还介绍了in关键字。它测定序列中是否包含某个确定的值。
+
+默认值在函数定义作用阈被解析，如下所示：
+
+```python
+i = 5
+
+def f(arg=i):
+    print(arg)
+
+i = 6
+f()
+```
+
+
 
 ### 4.7.2 关键字参数（Keyword Arguments）
 
