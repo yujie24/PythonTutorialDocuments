@@ -454,9 +454,51 @@ sketch : Cheese Shop Sketch
 
 注意在打印关键字参数之前，通过对关键字字典 keys() 方法的结果进行排序，生成了关键字参数名的列表；如果不这样做，打印出来的参数的顺序是未定义的。
 
-### 4.7.3 任意参数列表（Arbitrary Argument Lists）
+### 4.7.3 任意参数列表（Arbitrary Argument Lists） 可变参数列表
+
+最后，一个不常用的选择是可以让函数调用可变个数的函数。这些函数被包装进一个元组（参见 元组和序列）。在这些可变个数的参数之前，可以有0到多个普通的参数：
+
+```python
+def write_multiple_items(file, separator, *args):
+    file.write(separator.join(args))
+```
+
+通常，这些可变参数是参数列表中的最后一个，因为它们将把所有的剩余输入参数传递给函数。任何出现在*args 后的参数是关键字参数，这意味着，它们只能被用作关键字，而不是位置参数：
+
+```python
+>>> def concat(*args, sep="/"):
+...    return sep.join(args)
+...
+>>> concat("earth", "mars", "venus")
+'earth/mars/venus'
+>>> concat("earth", "mars", "venus", sep=".")
+'earth.mars.venus'
+```
 
 ### 4.7.4 分拆参数列表（Unpacking Argument Lists）
+
+另有一种相反的情况: 当你要传递的参数已经是一个列表，但要调用的函数却接受分开一个个的参数值。这时候你要把已有的列表拆开来。例如内建函数 range() 需要要独立的 start，stop 参数。你可以在调用函数时加一个 * 操作符来自动把参数列表拆开:
+
+```python
+>>> list(range(3, 6))            # normal call with separate arguments
+[3, 4, 5]
+>>> args = [3, 6]
+>>> list(range(*args))            # call with arguments unpacked from a list
+[3, 4, 5]
+```
+
+以同样的方式，可以使用 ** 操作符分拆关键字参数为字典:
+
+```python
+>>> def parrot(voltage, state='a stiff', action='voom'):
+...     print("-- This parrot wouldn't", action, end=' ')
+...     print("if you put", voltage, "volts through it.", end=' ')
+...     print("E's", state, "!")
+...
+>>> d = {"voltage": "four million", "state": "bleedin' demised", "action": "VOOM"}
+>>> parrot(**d)
+-- This parrot wouldn't VOOM if you put four million volts through it. E's bleedin' demised !
+```
 
 ### 4.7.5 Lambda表达式（Lambda Expressions）
 
