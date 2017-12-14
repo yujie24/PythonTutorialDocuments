@@ -569,7 +569,7 @@ Annotations: {'eggs': <class 'int'>, 'return': 'Nothing to see here', 'ham': 42}
 Arguments: wonderful spam
 ```
 
-## 4.8 Intermezzo: 编码风格（Coding Style）
+## 4.8 插曲（Intermezzo）: 编码风格（Coding Style）
 
 此时你已经可以写一些更长更复杂的 Python 程序，是时候讨论一下 编码风格 了。大多数语言可以写（或者更明白的说， 格式化 ）作几种不同的风格。有些比其它的更好读。让你的代码对别人更易读是个好想法，养成良好的编码风格对此很有帮助。
 
