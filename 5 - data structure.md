@@ -6,7 +6,9 @@
 
 Python的列表数据类型包含更多的方法。这里是所有的列表对象方法：
 
+```python
 list.append(x)
+```
 
 list.extend(L)
 
