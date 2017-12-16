@@ -9,10 +9,20 @@ Python的列表数据类型包含更多的方法。这里是所有的列表对�
 ```python
 list.append(x)
 ```
+  把一个元素添加到列表的结尾，相当于 a[len(a):] = [x] 。
 
+```python
 list.extend(L)
+```
+  将一个给定列表中的所有元素都添加到另一个列表中，相当于 a[len(a):] = L。
+  
+```
+list.insert(i,x)
+```
+  在指定位置插入一个元素。第一个参数是准备插入到其前面的那个元素的索引，例如 a.insert(0, x) 会插入到整个列表之前，而 a.insert(len(a), x) 相当于 a.append(x)。
+  
 
-list.
+
 ## 5.2 del语句
 
 ## 5.3 元组和序列
