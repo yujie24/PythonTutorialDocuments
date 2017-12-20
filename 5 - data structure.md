@@ -66,6 +66,69 @@ list.reverse()
 
  就地倒排列表中的元素。
 
+```python
+list.copy()
+```
+
+ 返回列表的一个浅拷贝。等同于a[:]。
+ 
+下面这个示例演示了列表的大部分方法：
+
+```python
+>>> a = [66.25, 333, 333, 1, 1234.5]
+>>> print(a.count(333), a.count(66.25), a.count('x'))
+2 1 0
+>>> a.insert(2, -1)
+>>> a.append(333)
+>>> a
+[66.25, 333, -1, 333, 1, 1234.5, 333]
+>>> a.index(333)
+1
+>>> a.remove(333)
+>>> a
+[66.25, -1, 333, 1, 1234.5, 333]
+>>> a.reverse()
+>>> a
+[333, 1234.5, 1, 333, -1, 66.25]
+>>> a.sort()
+>>> a
+[-1, 1, 66.25, 333, 333, 1234.5]
+>>> a.pop()
+1234.5
+>>> a
+[-1, 1, 66.25, 333, 333]
+```
+或者是：
+ 
+```python
+>>> fruits = ['orange', 'apple', 'pear', 'banana', 'kiwi', 'apple', 'banana']
+>>> fruits.count('apple')
+2
+>>> fruits.count('tangerine')
+0
+>>> fruits.index('banana')
+3
+>>> fruits.index('banana', 4)  # Find next banana starting a position 4
+6
+>>> fruits.reverse()
+>>> fruits
+['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange']
+>>> fruits.append('grape')
+>>> fruits
+['banana', 'apple', 'kiwi', 'banana', 'pear', 'apple', 'orange', 'grape']
+>>> fruits.sort()
+>>> fruits
+['apple', 'apple', 'banana', 'banana', 'grape', 'kiwi', 'orange', 'pear']
+>>> fruits.pop()
+'pear'
+```
+
+也许大家会发现像insert，remove或者sort这些修改列表的方法没有打印返回值-它们返回None。在Python中对所有可变的数据类型这是同意的设计原则。
+
+### 5.1.1 把列表当做堆栈（Stacks）使用
+
+
+
 ## 5.2 del语句
 
 ## 5.3 元组和序列
