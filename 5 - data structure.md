@@ -123,11 +123,52 @@ list.copy()
 'pear'
 ```
 
-也许大家会发现像insert，remove或者sort这些修改列表的方法没有打印返回值-它们返回None。在Python中对所有可变的数据类型这是同意的设计原则。
+也许大家会发现像insert，remove或者sort这些只是修改（modify）了列表，但没有打印返回值-它们返回默认值（default）None。在Python中对所有可变的数据类型这是统一的设计原则。
 
 ### 5.1.1 把列表当做堆栈（Stacks）使用
 
+列表的这些方法使得它被用作一个堆栈使用会很方便，堆栈最为特定的数据结构，最先进入的元素最后一个释放（相反，后进先出，last-in，first-out）。
 
+用append()方法可以把一个元素添加到堆栈顶。用不指定索引的pop()方法可以把一个元素从堆栈顶释放出来。例如：
+
+```python
+>>> stack = [3, 4, 5]
+>>> stack.append(6)
+>>> stack.append(7)
+>>> stack
+[3, 4, 5, 6, 7]
+>>> stack.pop()
+7
+>>> stack
+[3, 4, 5, 6]
+>>> stack.pop()
+6
+>>> stack.pop()
+5
+>>> stack
+[3, 4]
+```
+
+### 5.1.2 把列表仿作队列（Queues）使用
+
+列表也可以作为队列使用，队列作为特定的数据结构，最先进入的元素最先释放（先进先出）。但是，这样使用列表效率不高。
+
+相对来说，从列表末尾添加(appends)和弹出(pops)很快；在头部插入(inserts)和弹出(pops)很慢。（因为，所有的元素都必须移动一位）
+
+要实现一个队列，可以使用collections.deque，这个collection.deque被设计成添加和从两端弹出。 例如：
+
+```python
+>>> from collections import deque
+>>> queue = deque(["Eric", "John", "Michael"])
+>>> queue.append("Terry")           # Terry arrives
+>>> queue.append("Graham")          # Graham arrives
+>>> queue.popleft()                 # The first to arrive now leaves
+'Eric'
+>>> queue.popleft()                 # The second to arrive now leaves
+'John'
+>>> queue                           # Remaining queue in order of arrival
+deque(['Michael', 'Terry', 'Graham'])
+```
 
 ## 5.2 del语句
 
