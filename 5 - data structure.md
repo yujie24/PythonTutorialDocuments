@@ -170,6 +170,10 @@ list.copy()
 deque(['Michael', 'Terry', 'Graham'])
 ```
 
+### 5.1.3 列表推导式
+
+列表推导式
+
 ## 5.2 del语句
 
 ## 5.3 元组和序列
