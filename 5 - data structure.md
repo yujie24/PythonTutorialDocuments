@@ -170,7 +170,65 @@ list.copy()
 deque(['Michael', 'Terry', 'Graham'])
 ```
 
-### 5.1.3 列表推导式
+### 5.1.3 函数式编程工具
+
+在使用列表时有三个函数非常有用：filter()、map()和reduce()。
+
+filter(function, sequence)返回的序列由function(item)结果为真的元素组成。如果sequence是一个字符串或元组，结果将是相同的类型；否则，结果将始终是一个列表。例如，若要计算一个不能被2和3整除的序列：
+
+```python
+>>> def f(x): return x % 2 != 0 and x % 3 != 0
+...
+>>> filter(f, range(2, 25))
+[5, 7, 11, 13, 17, 19, 23]
+```
+
+map(function, sequence) 为序列中的每一个元素调用 function(item) 函数并返回结果的列表。例如，计算列表中所有元素的立方值：
+
+```python
+>>> def cube(x): return x*x*x
+...
+>>> map(cube, range(1, 11))
+[1, 8, 27, 64, 125, 216, 343, 512, 729, 1000]
+```
+
+可以传入多个序列；此时，传入的函数也必须要有和序列数目相同的参数，执行时会依次用各序列上对应的元素来调用函数（如果某个序列比另外一个短，就用 None 代替）。例如：
+
+```python
+>>> seq = range(8)
+>>> def add(x, y): return x+y
+...
+>>> map(add, seq, seq)
+[0, 2, 4, 6, 8, 10, 12, 14]
+```
+
+reduce(function, sequence) 只返回一个值，它首先以序列的前两个元素调用函数 function，然后再以返回的结果和下一个元素继续调用，依此执行下去。例如，若要计算数字 1 到 10 的总和：
+
+```python
+>>> def add(x,y): return x+y
+...
+>>> reduce(add, range(1, 11))
+55
+```
+
+如果序列中只有一个元素，将返回这个元素的值；如果序列为空，则引发异常。
+
+可以传入第三个参数作为初始值。在这种情况下，如果序列为空则返回起始值，否则会首先以初始值和序列的第一个元素调用function，然后是返回值和下一个元素，依此执行下去。例如，
+
+```python
+>>> def sum(seq):
+...     def add(x,y): return x+y
+...     return reduce(add, seq, 0)
+...
+>>> sum(range(1, 11))
+55
+>>> sum([])
+0
+```
+
+不要使用示例中定义的sum()：由于计算数字的总和是一个如此常见的需求，Python提供了内置的函数sum(sequence)，其工作原理和示例几乎一样。
+
+### 5.1.4 列表推导式
 
 列表推导式
 
