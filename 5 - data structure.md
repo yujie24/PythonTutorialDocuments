@@ -246,12 +246,47 @@ reduce(function, sequence) 只返回一个值，它首先以序列的前两个�
 ... ]
 ```
 
-下面的列表表达式会将行（rows）和列（columns）转置（transpose）：
+下面的列表表达式会将行（rows）和列（columns）转置（transpose），如果想交换行和列，就用嵌套列表推导式：
 
 ```python
 >>> [[row[i] for row in matrix] for i in range(4)]
 [[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
 ```
+
+像前面看到的，嵌套的列表推导式是对for后面的内容进行求值，所以上列就等价于：
+
+```python
+>>> transposed = []
+>>> for i in range(4):
+...     transposed.append([row[i] for row in matrix])
+...
+>>> transposed
+[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+```
+
+反过来说，如下也是一样的：
+
+```python
+>>> transposed = []
+>>> for i in range(4):
+...     # the following 3 lines implement the nested listcomp
+...     transposed_row = []
+...     for row in matrix:
+...         transposed_row.append(row[i])
+...     transposed.append(transposed_row)
+...
+>>> transposed
+[[1, 5, 9], [2, 6, 10], [3, 7, 11], [4, 8, 12]]
+```
+
+在实际中，你应该更喜欢使用内置函数组成复杂流程语句。对此种情况zip()函数将会做得更好：
+
+```python
+>>> list(zip(*matrix))
+[(1, 5, 9), (2, 6, 10), (3, 7, 11), (4, 8, 12)]
+```
+
+更多关于上面星号的用法说明，参考 参数列表的分拆。
 
 ## 5.2 del语句
 
