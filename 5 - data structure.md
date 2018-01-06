@@ -367,6 +367,45 @@ TypeError: 'tuple' object does not support item assignment
 
 ## 5.4 集合
 
+Python还包括集的数据类型。集合是没有重复元素的无序容器。基本用法包括成员资格测试和消除重复条目。集合对象也支持数学运算，如并，交，差和对称差。
+
+花括号或者set()函数可以用来创建集合。注意，你必须使用set()创建一个空的集合，而不能用{}；后面这种写法创建一个空的字典，我们将在下一节讨论这个数据结构。
+
+这里是一个简要的演示：
+
+```python
+>>> basket = {'apple', 'orange', 'apple', 'pear', 'orange', 'banana'}
+>>> print(basket)                      # show that duplicates have been removed
+{'orange', 'banana', 'pear', 'apple'}
+>>> 'orange' in basket                 # fast membership testing
+True
+>>> 'crabgrass' in basket
+False
+
+>>> # Demonstrate set operations on unique letters from two words
+...
+>>> a = set('abracadabra')
+>>> b = set('alacazam')
+>>> a                                  # unique letters in a
+{'a', 'r', 'b', 'c', 'd'}
+>>> a - b                              # letters in a but not in b
+{'r', 'd', 'b'}
+>>> a | b                              # letters in either a or b
+{'a', 'c', 'r', 'd', 'b', 'm', 'z', 'l'}
+>>> a & b                              # letters in both a and b
+{'a', 'c'}
+>>> a ^ b                              # letters in a or b but not both
+{'r', 'd', 'b', 'm', 'z', 'l'}
+```
+
+类似于列表推导式，集合也支持推导式：
+
+```python 
+>>> a = {x for x in 'abracadabra' if x not in 'abc'}
+>>> a
+{'r', 'd'}
+```
+
 ## 5.5 字典
 
 ## 5.6 循环技巧
